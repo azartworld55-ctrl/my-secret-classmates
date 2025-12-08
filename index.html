@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой секретный архив</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { text-align: center; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { padding: 10px; margin: 10px; width: 200px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .content { display: none; margin-top: 20px; }
+        h1, h2 { color: #333; }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login">
+            <h2>Введите пароль для доступа</h2>
+            <input type="password" id="password" placeholder="Ваш пароль">
+            <br>
+            <button onclick="checkPassword()">Войти</button>
+        </div>
+        <div id="content" class="content">
+            <h1>Мои одноклассники (секретный архив)</h1>
+            <p><strong>Инструкция:</strong> Здесь храни информацию. Добавляй/меняй текст ниже. Чтобы обновить сайт, редактируй этот файл и делай git push.</p>
+            
+            <h2>Иванов Иван</h2>
+            <p>Дата рождения: 15.03.2007<br>
+            Телефон: +7 (999) 123-45-67<br>
+            Адрес: ул. Ленина, 5<br>
+            Instagram: @ivan_07<br>
+            Дополнительно: Любимый предмет — математика.</p>
+            
+            <h2>Петрова Мария</h2>
+            <p>Дата рождения: 22.07.2007<br>
+            Телефон: +7 (999) 987-65-43<br>
+            VK: vk.com/masha_petrova<br>
+            Дополнительно: Капитан волейбольной команды.</p>
+            
+            <!-- Добавь здесь больше одноклассников по шаблону выше -->
+            
+            <button onclick="logout()">Выйти</button>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "МойТайныйПароль2025!";  // ← ИЗМЕНИ ЭТО НА СВОЙ ПАРОЛЬ ПРЯМО СЕЙЧАС
+        
+        function checkPassword() {
+            const input = document.getElementById('password').value;
+            if (input === correctPassword) {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                alert('Неверный пароль! Попробуй ещё раз.');
+            }
+        }
+        
+        function logout() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+        
+        // Автологин по "магической ссылке" (добавь #пароль к URL)
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        if (urlParams.has('pass') && urlParams.get('pass') === correctPassword) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
